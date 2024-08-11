@@ -58,7 +58,9 @@ We are actively updating and improving this repository. If you find any bugs or 
 
 ## Getting Started 🏁
 ### (Automatic)
--Run `run_LivePortrait.bat`. Everything is now contained in this one-click installer for both installation and operation!
+- Install [Git](https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe) if you don't already have it.
+- Clone the Repo: `git clone https://github.com/BenevolenceMessiah/LivePortrait.git`
+- Run `run_LivePortrait.bat`. Everything is now contained in this one-click installer for both installation and operation!
 ### (Manual)
 ### 1. Clone the code and prepare the environment 🛠️
 
