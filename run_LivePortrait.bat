@@ -22,22 +22,39 @@ for /f "delims=: tokens=*" %%A in ('findstr /b ::: "%~f0"') do @echo(%%A
 
 timeout /t 3
 
+:: Skipping Downloads if build is complete.
+if exist ffmpeg\ goto Skip1
+
+:: Download additional big stuff from Google Drive.
+echo ---------------------------------------------------------------
+echo As-salamu alaykum!!
+echo Downloading additional big files from Google Drive because I'm not paying for Git LFS storage space...
+echo ---------------------------------------------------------------
+:: powershell -command Invoke-WebRequest -uri "https://drive.usercontent.google.com/download?id=1G4cMOXvzhm3H4jtWoVLYtD81agoX_XOR&export=download&authuser=1" -OutFile "/d %~dp0\LivePortrait-Windows.zip"
+cd /d %~dp0
+call curl "https://drive.usercontent.google.com/download?id=1G4cMOXvzhm3H4jtWoVLYtD81agoX_XOR&export=download&authuser=1&confirm=t&uuid=11d4e615-4f0a-4eab-91a4-e97bbdc8223c&at=APZUnTVyeHT3MjXvWl_I8VAgH7QV%3A1723366403393" -o LivePortrait_Windows.zip
+
 :: Unzip assets and delete archives.
+echo ---------------------------------------------------------------
 echo Attempting initial install of virtual environment, FFMPEG, and pretrained AI models.
-echo Ignore any error messages as this script will run each time after the intitial install.
-gci -Recurse -Filter *.zip |ForEach-Object {Expand-Archive -Path $_.Fullname -DestinationPath $_.BaseName -Force}
+:: echo Ignore any error messages as this script will run each time after the intitial install.
+echo ---------------------------------------------------------------
+powershell -command "Expand-Archive -Force '%~dp0*.zip' '%~dp0'"
 
-pause
+if exist LivePortrait_Windows.zip del LivePortrait_Windows.zip
+:: del ffmpeg.zip
+:: del pretrained_weights.zip
+:: del LivePortrait_env.zip
 
-del ffmpeg.zip
-del pretrained_weights.zip
-del LivePortrait_env.zip
-
-:: Attempt to activate the LivePortrait environment and capture any error messages in a file
+:: Attempt to activate the LivePortrait environment and capture any error messages in a file.
+:Skip1
+echo As-salamu alaykum!!
+echo Press Ctrl+c at amy time to exit.
 echo Activating the LivePortrait environment...
+echo ---------------------------------------------------------------
 call LivePortrait_env\Scripts\activate > nul 2>env_error.txt
 
-:: Check the exit status of the previous command to see if the activation was successful
+:: Check the exit status of the previous command to see if the activation was successful.
 if %ERRORLEVEL% NEQ 0 (
     echo Activation failed. Displaying the error message:
     type env_error.txt
@@ -48,7 +65,7 @@ if %ERRORLEVEL% NEQ 0 (
     echo Environment activated successfully.
 )
 
-:: Delete the error message file regardless of whether activation was successful
+:: Delete the error message file regardless of whether activation was successful.
 if exist env_error.txt del env_error.txt
 
 :: Define the server's listening port
@@ -64,20 +81,22 @@ set /P option=Enter your choice:
 if %option% == 1 goto LaunchHuman
 if %option% == 2 goto LaunchAnimal
 
-:: Start the server in the background (Huaman)
+:: Start the server in the background (Huaman).
 :LaunchHuman
 echo Starting the server...
+echo ---------------------------------------------------------------
 start /B python app.py
-:: Start the server in the background (Animal)
+:: Start the server in the background (Animal).
 :LaunchAnimal
 echo Starting the server...
+echo ---------------------------------------------------------------
 start /B python app_animals.py
 
-:: Wait for a moment to allow the server to start
+:: Wait for a moment to allow the server to start.
 echo Waiting for the server to start...
 timeout /t 10 >nul
 
-:: Infinite loop to keep checking the port status
+:: Infinite loop to keep checking the port status.
 :check_port
 echo Checking if the server is listening on port %SERVER_PORT%...
 for /f %%i in ('python ./src/utils/check_windows_port.py %SERVER_PORT%') do (
