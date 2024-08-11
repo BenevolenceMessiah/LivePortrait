@@ -57,6 +57,9 @@ This repo, named **LivePortrait**, contains the official PyTorch implementation 
 We are actively updating and improving this repository. If you find any bugs or have suggestions, welcome to raise issues or submit pull requests (PR) 💖.
 
 ## Getting Started 🏁
+### (Automatic)
+-Run `run_LivePortrait.bat`. Everything is now contained in this one-click installer for both installation and operation!
+### (Manual)
 ### 1. Clone the code and prepare the environment 🛠️
 
 > [!Note]
