@@ -50,6 +50,9 @@ if exist LivePortrait_Windows.zip del LivePortrait_Windows.zip
 :Skip1
 echo As-salamu alaykum!!
 echo Press Ctrl+c at amy time to exit.
+:: Checking for Updates
+echo Checking for updates...
+git pull
 echo Activating the LivePortrait environment...
 echo ---------------------------------------------------------------
 call LivePortrait_env\Scripts\activate > nul 2>env_error.txt
