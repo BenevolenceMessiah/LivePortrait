@@ -9,6 +9,7 @@ __pycache__/
 **/*.pth
 **/*.onnx
 
+pretrained_weights/
 pretrained_weights/*.md
 pretrained_weights/docs
 pretrained_weights/liveportrait
